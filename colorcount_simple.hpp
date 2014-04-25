@@ -1,3 +1,8 @@
+// Copyright (c) 2013, The Pennsylvania State University.
+// All rights reserved.
+// 
+// See COPYING for license.
+
 #include "Random123/philox.h"
 
 using namespace std;
@@ -28,8 +33,8 @@ public:
         final_vert_counts[i] = 0.0;
     }
 
-    philox_uk.v[0] = time(0);
-    philox_k = philox4x32keyinit(philox_uk);
+    // philox_uk.v[0] = time(0);
+    // philox_k = philox4x32keyinit(philox_uk);
   }
   
   void init(Graph& full_graph, int* labels, bool label, 
@@ -52,8 +57,8 @@ public:
         final_vert_counts[i] = 0.0;
     }
 
-    philox_uk.v[0] = time(0)+thread_id;
-    philox_k = philox4x32keyinit(philox_uk);
+    // philox_uk.v[0] = time(0)+thread_id;
+    // philox_k = philox4x32keyinit(philox_uk);
   }
 
   double do_full_count(Graph* sub_graph, int* labels, int N)
@@ -125,18 +130,19 @@ private:
     
 #pragma omp parallel 
 {
-    int tid = omp_get_thread_num();
-
-    /* per-thread RNG initialization */
+    /* thread-local RNG initialization */
     r123::Philox4x32 rng;
-    r123::Philox4x32::ctr_type rng_ctr  = {{cur_iter * num_verts}};
-    r123::Philox4x32::key_type rng_key  = {{tid+1}};
+    r123::Philox4x32::ctr_type rng_ctr = {{}};
+    r123::Philox4x32::ukey_type rng_uk={{}};
+    rng_uk[0] = 42; /* user-supplied key */
+    r123::Philox4x32::key_type rng_key = rng_uk;
 
 #pragma omp for
     for (int v = 0; v < num_verts; ++v)
     {
+      rng_ctr[0] = v;
+      rng_ctr[1] = cur_iter;      
       r123::Philox4x32::ctr_type r = rng(rng_ctr, rng_key);
-      rng_ctr.incr();
 
       int color = r[0] % num_colors;
       colors_g[v] = color;
@@ -528,9 +534,9 @@ private:
   int total_count;
   int read_count;
 
-  philox4x32_ctr_t philox_c;
-  philox4x32_ukey_t philox_uk;
-  philox4x32_key_t philox_k;
+  // philox4x32_ctr_t philox_c;
+  // philox4x32_ukey_t philox_uk;
+  // philox4x32_key_t philox_k;
 };
 
 

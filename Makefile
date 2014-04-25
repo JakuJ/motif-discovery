@@ -9,4 +9,4 @@ debug:
 	${CXX} ${CXXDEBUGFLAGS} fascia.cpp -o fascia
 
 clean:
-	rm fascia
+	rm -f fascia fascia.exe

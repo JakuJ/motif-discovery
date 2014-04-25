@@ -1,3 +1,7 @@
+// Copyright (c) 2013, The Pennsylvania State University.
+// All rights reserved.
+// 
+// See COPYING for license.
 
 using namespace std;
 

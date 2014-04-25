@@ -1,3 +1,8 @@
+// Copyright (c) 2013, The Pennsylvania State University.
+// All rights reserved.
+// 
+// See COPYING for license.
+
 // Utility functions used by other classes
 
 using namespace std;
