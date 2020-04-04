@@ -6,8 +6,8 @@
 #include "graph.hpp"
 
 void read_in_graph(Graph &g, char *graph_file, bool labeled, int *&srcs_g, int *&dsts_g, int *&labels_g) {
-    ifstream file_g;
-    string line;
+    std::ifstream file_g;
+    std::string line;
 
     file_g.open(graph_file);
 
@@ -29,7 +29,7 @@ void read_in_graph(Graph &g, char *graph_file, bool labeled, int *&srcs_g, int *
             labels_g[i] = atoi(line.c_str());
         }
     } else {
-        labels_g = NULL;
+        labels_g = nullptr;
     }
 
     for (int i = 0; i < m_g; ++i) {

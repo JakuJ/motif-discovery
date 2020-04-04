@@ -67,7 +67,7 @@ void print_info(char* name)
   printf("\t\tv0 v1\n");
   printf("\t\tv0 v2\n");
   printf("\t\t...\n");
-  printf("\t\t(zero indexed)\n\n"); 
+  printf("\t\t(zero indexed)\n\n");
 
   printf("\ttemplate =\n");
   printf("\t\tsame format as graphfile\n\n");
@@ -96,7 +96,7 @@ void print_info(char* name)
 
 void run_single(char* graph_file, char* template_file, bool labeled,
                 bool do_vert, bool do_gdd,
-                int iterations, 
+                int iterations,
                 bool do_outerloop, bool calc_auto, bool verbose)
 {
   Graph g;
@@ -126,15 +126,15 @@ void run_single(char* graph_file, char* template_file, bool labeled,
   if (timing || verbose) {
     elt = timer();
   }
-  double full_count = 0.0;  
+  double full_count = 0.0;
   if (do_outerloop)
   {
     int num_threads = omp_get_max_threads();
     int iter = ceil( (double)iterations / (double)num_threads + 0.5);
-    
+
     colorcount* graph_count = new colorcount[num_threads];
     for (int tid = 0; tid < num_threads; ++tid) {
-      graph_count[tid].init(g, labels_g, labeled, 
+      graph_count[tid].init(g, labels_g, labeled,
                             calc_auto, do_gdd, do_vert, verbose);
     }
 
@@ -148,7 +148,7 @@ void run_single(char* graph_file, char* template_file, bool labeled,
     full_count += graph_count[tid].do_full_count(&t, labels_t, iter);
     if (do_gdd || do_vert)
       vert_counts[tid] = graph_count[tid].get_vert_counts();
-}   
+}
     full_count /= (double)num_threads;
     if (do_gdd || do_vert)
     {
@@ -156,8 +156,8 @@ void run_single(char* graph_file, char* template_file, bool labeled,
       if (do_gdd) {
         out.output_gdd(gdd_file);
         free(gdd_file);
-      } 
-      if (do_vert) {        
+      }
+      if (do_vert) {
         out.output_verts(vert_file);
         free(vert_file);
       }
@@ -166,7 +166,7 @@ void run_single(char* graph_file, char* template_file, bool labeled,
   else
   {
     colorcount graph_count;
-    graph_count.init(g, labels_g, labeled, 
+    graph_count.init(g, labels_g, labeled,
                       calc_auto, do_gdd, do_vert, verbose);
     full_count += graph_count.do_full_count(&t, labels_t, iterations);
 
@@ -205,7 +205,7 @@ if (timing || verbose) {
 
 void run_batch(char* graph_file, char* batch_file, bool labeled,
                 bool do_vert, bool do_gdd,
-                int iterations, 
+                int iterations,
                 bool do_outerloop, bool calc_auto, bool verbose)
 {
   Graph g;
@@ -230,7 +230,7 @@ void run_batch(char* graph_file, char* batch_file, bool labeled,
   string line;
   if_batch.open(batch_file);
   while (getline(if_batch, line))
-  {   
+  {
     char* template_file = strdup(line.c_str());
     read_in_graph(t, template_file, labeled, srcs_t, dsts_t, labels_t);
 
@@ -239,13 +239,13 @@ void run_batch(char* graph_file, char* batch_file, bool labeled,
     {
       int num_threads = omp_get_max_threads();
       int iter = ceil( (double)iterations / (double)num_threads + 0.5);
-      
+
       colorcount* graph_count = new colorcount[num_threads];
       for (int i = 0; i < num_threads; ++i) {
-        graph_count[i].init(g, labels_g, labeled, 
+        graph_count[i].init(g, labels_g, labeled,
                             calc_auto, do_gdd, do_vert, verbose);
       }
-    
+
       double** vert_counts;
       if (do_gdd || do_vert)
         vert_counts = new double*[num_threads];
@@ -256,7 +256,7 @@ void run_batch(char* graph_file, char* batch_file, bool labeled,
       full_count += graph_count[tid].do_full_count(&t, labels_t, iter);
       if (do_gdd || do_vert)
         vert_counts[tid] = graph_count[tid].get_vert_counts();
-}   
+}
       full_count /= (double)num_threads;
       if (do_gdd || do_vert)
       {
@@ -278,12 +278,12 @@ void run_batch(char* graph_file, char* batch_file, bool labeled,
     else
     {
       colorcount graph_count;
-      graph_count.init(g, labels_g, labeled, 
+      graph_count.init(g, labels_g, labeled,
                         calc_auto, do_gdd, do_vert, verbose);
       full_count += graph_count.do_full_count(&t, labels_t, iterations);
     }
 
-    printf("%e\n", full_count);  
+    printf("%e\n", full_count);
 
     delete [] srcs_t;
     delete [] dsts_t;
@@ -302,9 +302,9 @@ if (timing || verbose) {
 }
 
 
-void run_motif(char* graph_file, int motif, 
-                bool do_vert, bool do_gdd, 
-                int iterations, 
+void run_motif(char* graph_file, int motif,
+                bool do_vert, bool do_gdd,
+                int iterations,
                 bool do_outerloop, bool calc_auto, bool verbose)
 {
   char* motif_batchfile = NULL;
@@ -341,7 +341,7 @@ void run_motif(char* graph_file, int motif,
 
   run_batch(graph_file, motif_batchfile, false,
             do_vert, do_gdd,
-            iterations, 
+            iterations,
             do_outerloop, calc_auto, verbose);
 }
 
@@ -391,7 +391,7 @@ int main(int argc, char** argv)
         motif = atoi(optarg);
         break;
       case 'a':
-        calculate_automorphism = false; 
+        calculate_automorphism = false;
         break;
       case 'c':
         do_vert = true;
@@ -420,26 +420,26 @@ int main(int argc, char** argv)
       default:
         abort();
     }
-  } 
+  }
 
   if(argc < 3)
     print_info_short(argv[0]);
 
   if (motif && (motif < 3 || motif > 10))
   {
-    printf("\nMotif option must be between [3,10]\n");    
+    printf("\nMotif option must be between [3,10]\n");
     print_info(argv[0]);
   }
   else if (graph_file == NULL)
-  { 
-    printf("\nMust supply graph file\n");    
+  {
+    printf("\nMust supply graph file\n");
     print_info(argv[0]);
   }
   else if (template_file == NULL && batch_file == NULL && !motif)
   {
     printf("\nMust supply template XOR batchfile or -m option\n");
     print_info(argv[0]);
-  }  
+  }
   else if (template_file != NULL && batch_file != NULL)
   {
     printf("\nMust only supply template file XOR batch file\n");
@@ -447,20 +447,20 @@ int main(int argc, char** argv)
   }
   else if (iterations < 1)
   {
-    printf("\nNumber of iterations must be positive\n");    
+    printf("\nNumber of iterations must be positive\n");
     print_info(argv[0]);
   }
 
   if (motif)
   {
-    run_motif(graph_file, motif, 
-              do_vert, do_gdd, 
-              iterations, do_outerloop, calculate_automorphism, 
+    run_motif(graph_file, motif,
+              do_vert, do_gdd,
+              iterations, do_outerloop, calculate_automorphism,
               verbose);
   }
   else if (template_file != NULL)
   {
-    run_single(graph_file, template_file, labeled,                
+    run_single(graph_file, template_file, labeled,
                 do_vert, do_gdd,
                 iterations, do_outerloop, calculate_automorphism,
                 verbose);
