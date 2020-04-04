@@ -1,5 +1,5 @@
-CXX=g++
-CXXFLAGS=-Wall -std=gnu++0x -fopenmp -O3
+CXX=clang++
+CXXFLAGS=-fopenmp -L/usr/local/opt/llvm/lib -Wall -std=gnu++0x -O3
 CXXDEBUGFLAGS=-Wall -std=gnu++0x -fopenmp -g
 
 all:

@@ -1,6 +1,6 @@
 library(ggplot2)
 
-dat = read.csv(header=T, 'test.out.gdd')
+dat = read.csv(header=T, 'template.graph.gdd')
 
 ggplot(data = dat, aes(x = Count, y=Nodes)) + 
   geom_point() +
