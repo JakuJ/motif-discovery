@@ -1,6 +1,17 @@
+# IDE configs
 .idea/
-fascia
-ensemble
+#macOS
+FASCIA/.DS_Store
+.DS_Store
+# CMake generated files
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+cmake-build-debug/
+bin/
+Makefile
+*.cbp
+# Executable-generated files
 random_graphs/
 *.png
 *.pdf

@@ -1,14 +1,15 @@
 #include <sys/stat.h>
+#include <dirent.h>
 #include <iostream>
-#include <fstream>
+#include <string>
 
-#include "load_graph.hpp"
-#include "graph.hpp"
+#include "../FASCIA/load_graph.hpp"
+#include "../FASCIA/graph.hpp"
 
 int main(int argc, char **argv) {
     // process command line args
     if (argc < 2) {
-        std::cout << "Specify the input file" << std::endl;
+        std::cout << "You have to specify the input file" << std::endl;
     }
 
     char *input_path = argv[1];
@@ -24,7 +25,13 @@ int main(int argc, char **argv) {
     int edges = g.num_edges() / 2;
 
     // create output directory
-    const int dir_err = mkdir("random_graphs", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    std::string path = "./random_graphs";
+
+    if (opendir(path.c_str())) {
+        system(("rm -rf " + path).c_str());
+    }
+
+    const int dir_err = mkdir("./random_graphs", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     if (-1 == dir_err) {
         std::cout << "Error creating directory!" << std::endl;
         exit(1);
@@ -46,14 +53,17 @@ int main(int argc, char **argv) {
 
         // write the graph to file
         char filename[200];
-        snprintf(filename, sizeof(filename), "random_graphs/%s_%d.graph", input_path, iter);
+        snprintf(filename, sizeof(filename), "./random_graphs/random_%d.graph", iter);
 
         std::ofstream file(filename);
+
         file << g.num_vertices() << std::endl;
         file << edges << std::endl;
+
         for (int i = 0; i < edges; ++i) {
             file << sources[i] << " " << destinations[i] << std::endl;
         }
+
         file.close();
     }
 }
