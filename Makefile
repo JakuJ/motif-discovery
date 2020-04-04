@@ -1,6 +1,6 @@
 CXX=clang++
-CXXFLAGS=-fopenmp -L/usr/local/opt/llvm/lib -Wall -std=gnu++0x -O3
-CXXDEBUGFLAGS=-Wall -std=gnu++0x -fopenmp -g
+CXXFLAGS=-fopenmp -L/usr/local/opt/llvm/lib -std=gnu++0x -O3
+CXXDEBUGFLAGS=-fopenmp -L/usr/local/opt/llvm/lib -Wall -std=gnu++0x -g
 
 all:
 	${CXX} ${CXXFLAGS} fascia.cpp -o fascia
