@@ -1,6 +1,7 @@
 .idea/
 fascia
 ensemble
+random_graphs/
 *.png
 *.pdf
 *.gdd

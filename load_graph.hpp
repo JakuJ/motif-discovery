@@ -6,16 +6,15 @@
 #include "graph.hpp"
 
 void read_in_graph(Graph &g, char *graph_file, bool labeled, int *&srcs_g, int *&dsts_g, int *&labels_g) {
-    std::ifstream file_g;
+    std::ifstream file_g(graph_file);
     std::string line;
+    int n_g, m_g;
 
-    file_g.open(graph_file);
-
-    int n_g;
-    int m_g;
-
+    // vertex count
     getline(file_g, line);
     n_g = atoi(line.c_str());
+
+    // edge count
     getline(file_g, line);
     m_g = atoi(line.c_str());
 
