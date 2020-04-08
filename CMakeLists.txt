@@ -3,7 +3,7 @@ project(Motifs LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-if (NOT APPLE)
+if (APPLE)
     set(CMAKE_CXX_COMPILER clang++)
 else ()
     set(CMAKE_CXX_COMPILER g++)

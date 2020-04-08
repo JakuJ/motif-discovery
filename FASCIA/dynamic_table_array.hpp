@@ -3,6 +3,8 @@
 // 
 // See COPYING for license.
 
+#include <cassert>
+
 using namespace std;
 
 
