@@ -180,6 +180,7 @@ public:
       }
     }
 
+    assert(comb_num_index >= 0);
     cur_table[vertex][comb_num_index] = count;
   } 
   

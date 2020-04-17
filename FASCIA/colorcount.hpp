@@ -3,6 +3,7 @@
 // 
 // See COPYING for license.
 
+#include <cassert>
 #include "Random123/philox.h"
 
 using namespace std;
