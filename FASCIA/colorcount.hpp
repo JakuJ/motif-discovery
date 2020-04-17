@@ -158,13 +158,13 @@ private:
     r123::Philox4x32 rng;
     r123::Philox4x32::ctr_type rng_ctr = {{}};
     r123::Philox4x32::ukey_type rng_uk={{}};
-    rng_uk[0] = 42; /* user-supplied key */
+    // rng_uk[0] = 42; /* user-supplied key */
+    rng_uk[0] = rand() % 1000; /* user-supplied key */
     r123::Philox4x32::key_type rng_key = rng_uk;
 
 #pragma omp for
     for (int v = 0; v < num_verts; ++v)
     {
-      
       rng_ctr[0] = v;
       rng_ctr[1] = cur_iter;   
       r123::Philox4x32::ctr_type r = rng(rng_ctr, rng_key);

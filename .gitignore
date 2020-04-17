@@ -16,3 +16,5 @@ random_graphs/
 *.png
 *.pdf
 *.gdd
+*.csv
+.vscode

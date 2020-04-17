@@ -134,7 +134,8 @@ private:
     r123::Philox4x32 rng;
     r123::Philox4x32::ctr_type rng_ctr = {{}};
     r123::Philox4x32::ukey_type rng_uk={{}};
-    rng_uk[0] = 42; /* user-supplied key */
+    // rng_uk[0] = 42; /* user-supplied key */
+    rng_uk[0] = rand() % 1000; /* user-supplied key */
     r123::Philox4x32::key_type rng_key = rng_uk;
 
 #pragma omp for

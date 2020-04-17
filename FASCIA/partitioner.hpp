@@ -152,7 +152,7 @@ private:
   // Delete the creation array and make a final one of appropriate size
   void fin_arrays()
   {
-    subtemplate_count = current_creation_index;    
+    subtemplate_count = current_creation_index;
     subtemplates = new Graph[subtemplate_count];
     
     for (int i = 0; i < subtemplate_count; ++i)

@@ -345,9 +345,10 @@ void run_motif(char* graph_file, int motif,
 
 int main(int argc, char** argv)
 {
+  srand((unsigned int)time(nullptr));
+  
   // remove buffer so all outputs show up before crash
   setbuf(stdout, NULL);
-
 
   char* graph_file = NULL;
   char* template_file = NULL;
