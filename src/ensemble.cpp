@@ -6,46 +6,6 @@
 #include "../FASCIA/load_graph.hpp"
 #include "../FASCIA/graph.hpp"
 
-// class GraphSwitcher {
-//     unsigned int seed1, seed2;
-
-// public:
-//     GraphSwitcher() {
-//         seed1 = time(nullptr);
-//         seed2 = seed1 + 1;
-//     }
-
-//     Graph *permute_graph(const Graph &g) {
-//         int edges = g.num_edges() / 2;
-
-//         // randomly permute edges
-//         for (int i = 0; i < edges; ++i) {
-//             int e1 = rand_r(&seed1) % edges;
-//             int e2 = rand_r(&seed2) % edges;
-
-//             // a -> b, c -> d => a -> d, c -> b
-//             std::swap(destinations[e1], destinations[e2]);
-//         }
-//     }
-// };
-
-// Graph *permute_graph(const Graph &g) {
-//     // initialize RNG seeds
-//     unsigned int seed1 = time(nullptr);
-//     unsigned int seed2 = seed1 + 1;
-
-//     int edges = g.num_edges() / 2;
-
-//     // randomly permute edges
-//     for (int i = 0; i < edges; ++i) {
-//         int e1 = rand_r(&seed1) % edges;
-//         int e2 = rand_r(&seed2) % edges;
-
-//         // a -> b, c -> d => a -> d, c -> b
-//         std::swap(destinations[e1], destinations[e2]);
-//     }
-// }
-
 int main(int argc, char **argv) {
     // process command line args
     if (argc < 3) {
@@ -77,20 +37,28 @@ int main(int argc, char **argv) {
         std::cout << "Error creating directory!" << std::endl;
         exit(1);
     }
+    // Initialize target arrays
+    int* target_srcs = new int[edges];
+    int* target_dsts = new int[edges];
 
-    // initialize RNG seeds
+    // Initialize RNG seeds
     unsigned int seed1 = time(nullptr);
     unsigned int seed2 = seed1 + 1;
 
     for (int iter = 1; iter <= num_graphs; ++iter) {
         std::cout << "Generating: " << iter << " / " << num_graphs << std::endl;
+
+        // Create a new copy of the initial graph
+        std::copy(sources, sources + edges, target_srcs);
+        std::copy(destinations, destinations + edges, target_dsts);
+
         // randomly permute edges
         for (int i = 0; i < Q * edges; ++i) {
             int e1 = rand_r(&seed1) % edges;
             int e2 = rand_r(&seed2) % edges;
 
             // a -> b, c -> d => a -> d, c -> b
-            std::swap(destinations[e1], destinations[e2]);
+            std::swap(target_dsts[e1], target_dsts[e2]);
         }
 
         // write the graph to file
@@ -103,7 +71,7 @@ int main(int argc, char **argv) {
         file << edges << std::endl;
 
         for (int i = 0; i < edges; ++i) {
-            file << sources[i] << " " << destinations[i] << std::endl;
+            file << target_srcs[i] << " " << target_dsts[i] << std::endl;
         }
 
         file.close();
