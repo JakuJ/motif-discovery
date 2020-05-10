@@ -3,13 +3,13 @@ import os
 import math
 import pandas as pd
 import numpy as np
-import stats
+from scipy import stats
 
 def t_test(sum, sum_of_squares, n, m_0):
-  return (sum / n - m_0) / np.sqrt(sum_of_squares*(n)/(n - 1))
+    return (sum / n - m_0) / np.sqrt(sum_of_squares*(n)/(n - 1))
 
 def p_value(t_stat, n):
-  return stats.t.sf(np.abs(t_stat), n-1)*2
+    return stats.t.sf(np.abs(t_stat), n-1)*2
 
 if __name__ == "__main__":
     n = 1
