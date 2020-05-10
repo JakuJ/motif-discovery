@@ -34,8 +34,7 @@ echo "Liczenie dla sieci"
 bin/fascia -g "FASCIA/hpylo.graph" -t $TEMPLATE -i $NETITERS |\
 grep Single |\
 sed 's/Single //g' |\
-python3 script.py 0 >>\
+python3 script.py >>\
 network.csv
 
-echo "W naszej sieci: $(cat network.csv)"
 echo "Uruchom 'python3 wykres.py' aby zobacyć wykres dla sieci losowych"
