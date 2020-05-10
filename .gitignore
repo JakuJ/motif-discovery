@@ -18,3 +18,4 @@ random_graphs/
 *.gdd
 *.csv
 .vscode
+PIDFILE

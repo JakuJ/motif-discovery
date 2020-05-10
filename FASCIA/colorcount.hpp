@@ -113,7 +113,8 @@ public:
             count += this_count;
 
             auto norm_count = floor(this_count * magic + 0.5);
-            printf("Single %e\n", norm_count);
+            printf("Single %e", norm_count);
+            std::cout << std::endl;
 
             if (verbose) {
                 elt = timer() - elt;

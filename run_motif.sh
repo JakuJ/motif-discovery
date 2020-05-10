@@ -3,8 +3,7 @@ set -e
 
 NETWORK="FASCIA/hpylo.graph"
 TEMPLATE="motif/graphs_n8_23/0.graph"
-NETITERS=100
-NUMRANDOMS=10
+NUMRANDOMS=20
 RANDITERS=10
 
 strip() {
@@ -12,8 +11,8 @@ strip() {
 }
 
 # Czyszczenie plików
-rm -f losowe.csv || true
-rm -f network.csv || true
+rm -f losowe.csv
+rm -f network.csv
 
 # Generowanie losowych
 bin/ensemble $NETWORK $NUMRANDOMS
@@ -31,9 +30,12 @@ done
 
 echo "Liczenie dla sieci"
 
+NETITERS=$(python3 niter.py $NETWORK $TEMPLATE "meanRandom")
+echo "Max. iteracji: $NETITERS"
+
 bin/fascia -g "FASCIA/hpylo.graph" -t $TEMPLATE -i $NETITERS |\
-grep Single |\
-sed 's/Single //g' |\
+grep --line-buffered Single |\
+stdbuf -oL sed 's/Single //g' |\
 python3 script.py >>\
 network.csv
 

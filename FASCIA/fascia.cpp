@@ -35,6 +35,12 @@ using namespace std;
 
 bool timing = false;
 
+void signal_callback_handler(int signum)
+{
+    std::cerr << "Fascia is kill" << std::endl;
+    exit(EXIT_SUCCESS);
+}
+
 void print_info_short(char* name)
 {
   printf("\nTo run: %s [-g graphfile] [-t template || -b batchfile] [options]\n", name);
@@ -346,6 +352,8 @@ void run_motif(char* graph_file, int motif,
 int main(int argc, char** argv)
 {
   srand((unsigned int)time(nullptr));
+
+  signal(SIGPIPE, signal_callback_handler);
   
   // remove buffer so all outputs show up before crash
   setbuf(stdout, NULL);
