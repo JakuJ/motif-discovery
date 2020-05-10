@@ -8,6 +8,6 @@ if __name__ == "__main__":
 
     print(f"Losowe - średnia: {np.mean(randoms)}, SD: {np.std(randoms)}")
 
-    plt.hist(randoms)
+    plt.hist(randoms, bins=30)
     plt.title(f"Liczebności dla {len(randoms)} grafów losowych")
     plt.show()
