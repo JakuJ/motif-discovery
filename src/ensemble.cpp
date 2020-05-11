@@ -38,15 +38,15 @@ int main(int argc, char **argv) {
         exit(1);
     }
     // Initialize target arrays
-    int* target_srcs = new int[edges];
-    int* target_dsts = new int[edges];
+    int *target_srcs = new int[edges];
+    int *target_dsts = new int[edges];
 
     // Initialize RNG seeds
     unsigned int seed1 = time(nullptr);
     unsigned int seed2 = seed1 + 1;
 
     for (int iter = 1; iter <= num_graphs; ++iter) {
-        std::cout << "Generating: " << iter << " / " << num_graphs << std::endl;
+        std::cout << "\rGenerating: " << iter << " / " << num_graphs << std::flush;
 
         // Create a new copy of the initial graph
         std::copy(sources, sources + edges, target_srcs);
@@ -76,4 +76,6 @@ int main(int argc, char **argv) {
 
         file.close();
     }
+
+    std::cout << std::endl;
 }

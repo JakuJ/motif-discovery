@@ -1,9 +1,10 @@
 #!/bin/bash
+
 set -e
 
 NETWORK="FASCIA/hpylo.graph"
-TEMPLATE="motif/graphs_n8_23/0.graph"
-NUMRANDOMS=20
+TEMPLATE="motif/graphs_n6_6/2.graph"
+NUMRANDOMS=100
 RANDITERS=10
 
 strip() {
@@ -20,7 +21,7 @@ bin/ensemble $NETWORK $NUMRANDOMS
 echo "Liczenie dla losowych grafow"
 
 for i in random_graphs/*; do
-    echo $i
+    echo -en "\r$i"
     bin/fascia -g $i -t $TEMPLATE -i $RANDITERS |\
     grep -v 'Single' |\
     grep -E '[0-9]' |\
@@ -28,7 +29,7 @@ for i in random_graphs/*; do
     losowe.csv
 done
 
-echo "Liczenie dla sieci"
+echo -e "\nLiczenie dla sieci"
 
 NETITERS=$(python3 niter.py $NETWORK $TEMPLATE "meanRandom")
 echo "Max. iteracji: $NETITERS"
