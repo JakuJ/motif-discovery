@@ -7,6 +7,7 @@ NETWORK="hpylo-nonmulti.graph"
 #TEMPLATE="motif/graphs_n6_6/1.graph" # brak decyzji
 #TEMPLATE="motif/graphs_n6_6/2.graph" # na pewno nie motyw
 TEMPLATE="motif/graphs_n8_23/1.graph" # motyw
+
 NUMRANDOMS=100
 RANDITERS=10
 

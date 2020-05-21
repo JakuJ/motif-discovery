@@ -31,7 +31,6 @@ if __name__ == "__main__":
                     print(f"Motif found on iteration {n} - p = {pval}", file=sys.stderr)
                 else:
                     print(f"Candidate discarded on iteration {n} - p = {pval}", file=sys.stderr)
-
                 exit(0)
 
     print(f"Couldn't decide - p = {pval}", flush=True, file=sys.stderr)
