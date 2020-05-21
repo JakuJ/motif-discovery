@@ -28,5 +28,7 @@ if __name__ == "__main__":
     plot_norm(net)
     plot_hist(net)
 
+    plt.xlabel("Liczba wystąpień motywu")
+    plt.ylabel("Prawdopodobieństwo wystąpienia")
     plt.legend(['Sieci losowe', 'Sieć wejściowa', 'Sieci losowe', 'Sieć wejściowa'])
     plt.show()
