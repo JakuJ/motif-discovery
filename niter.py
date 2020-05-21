@@ -1,10 +1,12 @@
+#!/usr/local/bin/python3
+
 import pandas as pd
 import numpy as np
 import sys
 import math
 
 args = sys.argv
-sigma = 0.005
+sigma = 0.0005
 assert (len(args) == 4)
 
 
@@ -28,6 +30,11 @@ def countNiter(args, sigma):
     else:
         print("Unknown variant")
         return -1
+    sys.stderr.write(f"k: {k}\n")
+    sys.stderr.write(f"sigma: {sigma}\n")        
+    sys.stderr.write(f"expN: {expN}\n")
+    sys.stderr.write(str((np.exp(k) * np.log(1 / sigma)) / (sigma ** 2 * expN ** 2)) + "\n")
+    sys.stderr.write(str(math.ceil((np.exp(k) * np.log(1 / sigma)) / (sigma ** 2 * expN ** 2))) + "\n")
     return max(100, math.ceil((np.exp(k) * np.log(1 / sigma)) / (sigma ** 2 * expN ** 2)))
 
 

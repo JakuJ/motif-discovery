@@ -2,8 +2,8 @@
 
 set -e
 
-NETWORK="FASCIA/hpylo.graph"
-TEMPLATE="motif/graphs_n6_6/2.graph"
+NETWORK="hpylo-nonmulti.graph"
+TEMPLATE="motif/graphs_n8_23/1.graph"
 NUMRANDOMS=100
 RANDITERS=10
 
@@ -31,13 +31,13 @@ done
 
 echo -e "\nLiczenie dla sieci"
 
-NETITERS=$(python3 niter.py $NETWORK $TEMPLATE "meanRandom")
+NETITERS=$(python3 niter.py $NETWORK $TEMPLATE "expER")
 echo "Max. iteracji: $NETITERS"
 
-bin/fascia -g "FASCIA/hpylo.graph" -t $TEMPLATE -i $NETITERS |\
+bin/fascia -g $NETWORK -t $TEMPLATE -i $NETITERS |\
 grep --line-buffered Single |\
 stdbuf -oL sed 's/Single //g' |\
 python3 script.py >>\
 network.csv
 
-echo "Uruchom 'python3 wykres.py' aby zobacyć wykres dla sieci losowych"
+echo "Uruchom 'python3 wykres.py' aby zobaczyć wykres dla sieci losowych"
