@@ -21,17 +21,19 @@ norm_name () {
 mkdir -p results
 
 # Obliczenia dla sieci losowych
-for netfilename in $(ls "$NETWORK_DIR" | grep graph | grep "Scere"); do
+for netfilename in $(ls "$NETWORK_DIR" | grep graph); do
   echo "Network: $netfilename"
 
   # Zrób plik wynikowy
   netname=$(norm_name "$netfilename") # nazwa dla pliku
   target_file="results/${netname}.csv"
 
-  echo "kandydat;srednia" >> "$target_file"
+  echo "kandydat;srednia" > "$target_file"
 
   # Generuj losowe sieci
   network="$NETWORK_DIR/$netfilename" # pełna ścieżka
+
+  rm -f random_graphs/*
   bin/ensemble $network $NUMRANDOMS
 
   for tmpdir in ${TEMPLATE_DIRS[*]}; do
@@ -45,7 +47,7 @@ for netfilename in $(ls "$NETWORK_DIR" | grep graph | grep "Scere"); do
 
       echo "Template: ${templatepath}"
 
-      echo -n '' > losowe.csv
+      rm -f losowe.csv
       for i in random_graphs/*; do
         echo -en "\rGraph: $i"
 

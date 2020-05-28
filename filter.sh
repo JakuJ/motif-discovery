@@ -14,6 +14,9 @@ if [ $# -lt 2 ]; then
   echo -e "\tmodel:\t\"meanRandom\" or \"expER\" - a model for calculating max. number of iterations
   \t\tFASCIA tries before giving up."
   echo -e "\t\tDefaults to \"meanRandom\""
+
+  echo -e "\n\tThis script emits debug info to stderr. To get a list of probable motifs redirect emits
+  \toutput to a file like so: \"filter.sh args > motifs.txt\""
   exit 1
 fi
 
@@ -59,10 +62,10 @@ for template_dir in $(ls "$TEMPLATE_ROOT" | grep -E "graphs_n\d_" | sort -h | he
     templatepath="$TEMPLATE_ROOT/$template_dir/$template"
 
     # Przeliczenie liczności w sieciach podobnych
-    echo -n '' > losowe.csv
+    rm -f losowe.csv
+
     for i in random_graphs/*; do
-        >&2 echo -en "\rDrzewo: ${i}"
-        bin/fascia -g "$i" -t "$templatepath" -i "$RANDITERS" |\
+        bin/fascia -g "$i" -t $templatepath -i "$RANDITERS" |\
         grep -v 'Single' |\
         grep -E '[0-9]' |\
         strip >>\
@@ -70,22 +73,17 @@ for template_dir in $(ls "$TEMPLATE_ROOT" | grep -E "graphs_n\d_" | sort -h | he
     done
 
     netiters=$(python3 niter.py $NETWORK $templatepath $MODEL)
-    >&2 echo -e "\nMax. iteracji: ${netiters}"
 
     exit_code=$(bin/fascia -g "$NETWORK" -t "$templatepath" -i "$netiters" |\
     grep --line-buffered Single |\
     stdbuf -oL sed 's/Single //g' |\
     python3 filter.py)
 
-    >&2 echo "Wynik: $exit_code"
-
-    if [[ $exit_code -eq 2 && $FILTER -eq "nonnegative" ]]; then
-      # Brak decyzji
-      echo "$templatepath"
-    elif [ $exit_code -eq 1 ]; then
+    if [[ $exit_code -eq 1 || ($exit_code -eq 2 && $FILTER -eq "nonnegative") ]]; then
+      >&2 echo "Possible motif found"
       echo "$templatepath"
     else
-      echo "NIE"
+      >&2 echo "Motif candidate discarded"
     fi
   done
 done

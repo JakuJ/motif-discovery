@@ -42,6 +42,7 @@ for netfilename in $(ls "$NETWORK_DIR" | grep graph); do
       echo -n "${netname};" >> "$target_file"
       echo -n "${prefix};" >> "$target_file"
 
+      rm -f losowe.csv
       for i in random_graphs/*; do
         echo -en "\r$i"
         bin/fascia -g "$i" -t $templatepath -i "$RANDITERS" |\

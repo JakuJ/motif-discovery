@@ -31,7 +31,7 @@ def countNiter(args, sigma):
         print("Unknown variant")
         return -1
 
-    return max(100, math.ceil((np.exp(k) * np.log(1 / sigma)) / (sigma ** 2 * expN ** 2)))
+    return min(500, max(100, math.ceil((np.exp(k) * np.log(1 / sigma)) / (sigma ** 2 * expN ** 2))))
 
 
 sys.stdout.write(str(countNiter(args, sigma)))
