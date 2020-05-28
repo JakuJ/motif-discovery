@@ -15,13 +15,10 @@ add_compile_options("-std=gnu++0x" "-Ofast" "-ffast-math" "-Wall" "-Wno-expansio
 # FASCIA
 find_package(OpenMP)
 
-if (OpenMP_FOUND)
-    FILE(GLOB FASCIA_SOURCES FASCIA/*.h FASCIA/*.hpp)
-    add_executable(fascia FASCIA/fascia.cpp ${FASCIA_SOURCES})
-    target_link_libraries(fascia PUBLIC OpenMP::OpenMP_CXX)
-else ()
-    message(WARNING "OpenMP not found, skipping FASCIA")
-endif ()
+FILE(GLOB FASCIA_SOURCES FASCIA/*.h FASCIA/*.hpp)
+add_executable(fascia FASCIA/fascia.cpp ${FASCIA_SOURCES})
+target_link_libraries(fascia PUBLIC OpenMP::OpenMP_CXX)
 
 # Random graph generator
 add_executable(ensemble src/ensemble.cpp)
+target_link_libraries(ensemble PUBLIC OpenMP::OpenMP_CXX)
