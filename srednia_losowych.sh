@@ -19,10 +19,11 @@ norm_name () {
 
 # Przygotowanie
 mkdir -p results
-rm -f results/*
 
-# Obliczenia
-for netfilename in $(ls "$NETWORK_DIR" | grep graph); do
+# Obliczenia dla sieci losowych
+for netfilename in $(ls "$NETWORK_DIR" | grep graph | grep "Scere"); do
+  echo "Network: $netfilename"
+
   # Zrób plik wynikowy
   netname=$(norm_name "$netfilename") # nazwa dla pliku
   target_file="results/${netname}.csv"
@@ -39,24 +40,23 @@ for netfilename in $(ls "$NETWORK_DIR" | grep graph); do
       prefix=$(norm_name "$tmpdir/$template") # pretty name
       echo -n "$prefix;" >> "$target_file"
 
-      # Mielenie losowych
+      # Średnia dla sieci podobnych
       templatepath="motif/$tmpdir/$template"
 
       echo "Template: ${templatepath}"
 
       echo -n '' > losowe.csv
       for i in random_graphs/*; do
-        echo -en "\rGraph: ${i}"
+        echo -en "\rGraph: $i"
 
         bin/fascia -g "$i" -t $templatepath -i "$RANDITERS" |\
         grep -v 'Single' |\
         grep -E '[0-9]' |\
         strip >>\
         losowe.csv
-
-        echo ""
       done
-      python3 srednia_en_masse.py >> "$target_file"
+      echo ""
+      python3 srednia_losowych.py >> "$target_file"
     done
   done
 done
