@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.9)
 project(Motifs LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 if (APPLE)
@@ -9,7 +10,7 @@ else ()
     set(CMAKE_CXX_COMPILER g++)
 endif ()
 
-add_compile_options("-std=gnu++0x" "-O3" "-Wall" "-Wno-expansion-to-defined")
+add_compile_options("-std=gnu++0x" "-Ofast" "-ffast-math" "-Wall" "-Wno-expansion-to-defined")
 
 # FASCIA
 find_package(OpenMP)
