@@ -37,7 +37,7 @@ for netfilename in $(ls "$NETWORK_DIR" | grep graph | grep "Scere"); do
   for tmpdir in ${TEMPLATE_DIRS[*]}; do
     for template in $(ls "motif/$tmpdir" | grep graph); do
       # Zapisz nazwę motywu
-      prefix=$(norm_name "$tmpdir/$template") # pretty name
+      prefix=$(norm_name "$tmpdir/$template")
       echo -n "$prefix;" >> "$target_file"
 
       # Średnia dla sieci podobnych

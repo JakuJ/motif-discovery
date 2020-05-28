@@ -37,7 +37,6 @@ bool timing = false;
 
 void signal_callback_handler(int signum)
 {
-    std::cerr << "FASCIA is kill" << std::endl;
     exit(EXIT_SUCCESS);
 }
 

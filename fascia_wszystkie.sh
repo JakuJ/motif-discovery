@@ -17,46 +17,51 @@ norm_name () {
   echo "${tmp%_graph}"
 }
 
-# Przygotowanie
-mkdir -p results
+mode="meanRandom" # albo expER
+target_file="fascia_results_${mode}.csv"
 
-# Obliczenia dla sieci losowych
+echo "siec;kandydat;max_iteracji;iteracje;wynik;motyw" > "$target_file"
+
+# Obliczenia dla sieci wejściowych
 for netfilename in $(ls "$NETWORK_DIR" | grep graph); do
   echo "Network: $netfilename"
 
   # Zrób plik wynikowy
-  netname=$(norm_name "$netfilename") # nazwa dla pliku
-  target_file="results/${netname}.csv"
-
-  echo "kandydat;srednia" >> "$target_file"
-
-  # Generuj losowe sieci
+  netname=$(norm_name "$netfilename") # nazwa do csv
   network="$NETWORK_DIR/$netfilename" # pełna ścieżka
+
+  # Sieci losowe
   bin/ensemble $network $NUMRANDOMS
 
   for tmpdir in ${TEMPLATE_DIRS[*]}; do
     for template in $(ls "motif/$tmpdir" | grep graph); do
       # Zapisz nazwę motywu
-      prefix=$(norm_name "$tmpdir/$template") # pretty name
-      echo -n "$prefix;" >> "$target_file"
-
-      # Średnia dla sieci podobnych
+      prefix=$(norm_name "$tmpdir/$template")
       templatepath="motif/$tmpdir/$template"
 
-      echo "Template: ${templatepath}"
+      echo -n "${netname};" >> "$target_file"
+      echo -n "${prefix};" >> "$target_file"
 
-      echo -n '' > losowe.csv
       for i in random_graphs/*; do
-        echo -en "\rGraph: $i"
-
+        echo -en "\r$i"
         bin/fascia -g "$i" -t $templatepath -i "$RANDITERS" |\
         grep -v 'Single' |\
         grep -E '[0-9]' |\
         strip >>\
         losowe.csv
       done
-      echo ""
-      python3 srednia_losowych.py >> "$target_file"
+
+      # Średnia dla sieci podobnych
+      echo "\nTemplate: ${templatepath}"
+
+      NETITERS=$(python3 niter.py $network $templatepath $mode)
+      echo "Max. iteracji: $NETITERS"
+      echo -n "${NETITERS};" >> "$target_file"
+
+      bin/fascia -g $network -t $templatepath -i "$NETITERS" |\
+      grep --line-buffered Single |\
+      stdbuf -oL sed 's/Single //g' |\
+      python3 srednia_fascii.py >> "$target_file"
     done
   done
 done
