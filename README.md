@@ -3,8 +3,16 @@
 Repozytorium stworzone na potrzeby projektu w ramach przedmiotu "Grafy i sieci: projekt"
 prowadzonego w sem. letnim 2020 na Wydziale Matematyki i Nauk Informacyjnych PW.
 
+Autorami projektu są:
+
+* **[Łukasz Brzozowski](https://github.com/lukaszbrzozowski)**
+* **[Jakub Janaszkiewicz](https://github.com/JakuJ)**
+* **[Kacper Siemaszko](https://github.com/Siemashko)**
+
 Projekt skupia się na badaniu możliwości poprawy algorytmu MODA przez zastąpienie jego pierwszego etapu
 wersją algorytmu FASCIA z wczesnym stopowaniem opartym o testy statystyczne.
+
+Dokumentacja wstępna opisująca badane zagadnienie znajduje się w pliku **[Dokumentacja.pdf](Dokumentacja.pdf)**.
 
 ### Budowanie
 Wymagane narzędzia:
