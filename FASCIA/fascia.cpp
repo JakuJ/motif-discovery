@@ -5,13 +5,12 @@
 
 using namespace std;
 
-#ifdef __WIN32__
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 #include <io.h>
 #else
 #include <unistd.h>
 #endif
 
-#include <sys/time.h>
 #include <fstream>
 #include <cstdio>
 #include <cstdlib>

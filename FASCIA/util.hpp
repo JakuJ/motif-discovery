@@ -5,15 +5,13 @@
 
 // Utility functions used by other classes
 
+#include <ctime>
+
 using namespace std;
 
 
 double timer() {
-
-    struct timeval tp;
-    gettimeofday(&tp, NULL);
-    return ((double) (tp.tv_sec) + 1e-6 * tp.tv_usec);
-
+    return static_cast<double>(std::time(nullptr));
 }
 
 int* dynamic_to_static(vector<int>& arr)

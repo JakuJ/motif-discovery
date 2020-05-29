@@ -2,8 +2,22 @@
 #include <memory>
 #include <string>
 #include <filesystem>
+#include <random>
+#include <thread>
+
+#if defined (_MSC_VER)  // Visual studio
+#define thread_local __declspec( thread )
+#elif defined (__GCC__) // GCC
+#define thread_local __thread
+#endif
 
 #include "../FASCIA/load_graph.hpp"
+
+int intRand(const int &min, const int &max) {
+    static thread_local std::mt19937 generator(static_cast<unsigned int>(time(nullptr)));
+    std::uniform_int_distribution<int> distribution(min, max);
+    return distribution(generator);
+}
 
 int main(int argc, char **argv) {
     // process command line args
@@ -38,10 +52,6 @@ int main(int argc, char **argv) {
         std::unique_ptr<int[]> target_srcs(new int[edges]);
         std::unique_ptr<int[]> target_dsts(new int[edges]);
 
-        // Initialize RNG seeds
-        unsigned seed1 = time(nullptr);
-        unsigned seed2 = seed1 + 1;
-
 #pragma omp for schedule(dynamic)
         for (int iter = 1; iter <= num_graphs; ++iter) {
             if (iter % 10 == 0) {
@@ -54,8 +64,8 @@ int main(int argc, char **argv) {
 
             // randomly permute edges
             for (int i = 0; i < 100 * edges; ++i) {
-                const int e1 = rand_r(&seed1) % edges;
-                const int e2 = rand_r(&seed2) % edges;
+                int e1 = intRand(0, edges - 1);
+                int e2 = intRand(0, edges - 1);
 
                 // a -> b, c -> d => a -> d, c -> b
                 std::swap(target_dsts[e1], target_dsts[e2]);
