@@ -1,0 +1,6 @@
+*.h linguist-language=C
+FASCIA/* linguist-vendored
+FASCIA/fascia.cpp -linguist-vendored
+*.pdf linguist-documentation
+Wizualizacje/* linguist-documentation
+Wizualizacje/resultsCalc.ipynb -linguist-documentation

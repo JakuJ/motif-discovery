@@ -14,6 +14,8 @@ wersją algorytmu FASCIA z wczesnym stopowaniem opartym o testy statystyczne.
 
 Dokumentacja wstępna opisująca badane zagadnienie znajduje się w pliku **[Dokumentacja.pdf](Dokumentacja.pdf)**.
 
+Katalog `Wizualizacje` zawiera wszystkie pliki potrzebne do odtworzenia wizualizacji użytych w raporcie końcowym.
+
 ### Budowanie
 Wymagane narzędzia:
 
@@ -28,7 +30,7 @@ cmake .
 make
 ```
 
-wewnątrz głównego katalogu. Utworzy to folder `bin` zawierający wymagane pliki wykonywalne.
+wewnątrz głównego katalogu. Spowoduje to utworzenie folderu `bin` zawierającego wymagane pliki wykonywalne.
 
 ### Struktura repozytorium
 
@@ -54,7 +56,8 @@ Uruchomienie przygotowanych skryptów wymaga systemu unixopodobnego oraz następ
 * programów `bin/fascia` oraz `bin/ensemble` zbudowanych w poprzednim kroku 
 * powłoki `bash`
 * programu pozwalającego na zmianę buforowania std. wyjścia – `stdbuf`
-* interpretera Pythona, `python3`, z bibliotekami *pandas, numpy, scipy, matplotlib*.
+* interpretera Pythona, `python3`, z bibliotekami *pandas, numpy, scipy, matplotlib*
+* opcjonalnie - środowiska `jupyter notebook` do odtworzenia wizualizacji przy użyciu notatnika [resultsCalc](Wizualizacje/resultsCalc.ipynb)
 
 Po skompletowaniu wymaganych programów można przejść do odtworzenia eksperymentów wykonanych na potrzeby
 projektu. Głównym skryptem przygotowanym z myślą o użytkowniku końcowym jest `filter.sh`. Skrypt zawiera dokumentację
