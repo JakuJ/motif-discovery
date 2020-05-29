@@ -1,8 +1,7 @@
-#include <sys/stat.h>
-#include <dirent.h>
 #include <iostream>
 #include <memory>
 #include <string>
+#include <filesystem>
 
 #include "../FASCIA/load_graph.hpp"
 
@@ -25,11 +24,10 @@ int main(int argc, char **argv) {
     // create output directory
     const std::string path{"./random_graphs"};
 
-    if (opendir(path.c_str())) {
-        system(("rm -rf " + path).c_str());
-    }
+    std::filesystem::remove_all(path);
+    std::filesystem::create_directory(path);
 
-    if (-1 == mkdir("./random_graphs", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) {
+    if (!std::filesystem::exists(path)) {
         std::cout << "Error creating directory!" << std::endl;
         exit(1);
     }

@@ -5,7 +5,12 @@
 
 using namespace std;
 
+#ifdef __WIN32__
+#include <io.h>
+#else
 #include <unistd.h>
+#endif
+
 #include <sys/time.h>
 #include <fstream>
 #include <cstdio>
