@@ -23,6 +23,8 @@ Wymagane narzędzia:
 * `CMake` w wersji >= 3.9
 * Kompilator C++ wspierający OpenMP (np. standardowe dystrybucje `clang` lub `gcc`)
 
+W przypadku korzystania z kompilatora `gcc`, musi być on co najmniej w wersji 9.
+
 Aby zbudować programy wymagane do odtworzenia eksperymentów (implementacji algorytmu FASCIA
 oraz generatora sieci podobnych) należy wykonać
 
