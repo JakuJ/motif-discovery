@@ -24,14 +24,15 @@ Wymagane narzędzia:
 * Kompilator C++ wspierający OpenMP (np. standardowe dystrybucje `clang` lub `gcc`)
 
 Aby zbudować programy wymagane do odtworzenia eksperymentów (implementacji algorytmu FASCIA
-oraz generatora sieci podobnych), należy wykonać
+oraz generatora sieci podobnych) należy wykonać
 
 ```shell script
 cmake .
-make
 ```
 
-wewnątrz głównego katalogu. Spowoduje to utworzenie folderu `bin` zawierającego wymagane pliki wykonywalne.
+wewnątrz głównego katalogu. Na systemach unixopodobnych wygeneruje to plik `Makefile`, dzięki któremu
+poleceniem `make` można zbudować pliki wykonywalne. W przypadku systemu Windows, program `cmake` może domyślnie
+korzystać z innego generatora niż "Unix Makefiles" i np. utworzyć pliki projektu Visual Studio.
 
 ### Struktura repozytorium
 
