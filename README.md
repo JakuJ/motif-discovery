@@ -31,8 +31,7 @@ cmake .
 ```
 
 wewnątrz głównego katalogu. Na systemach unixopodobnych wygeneruje to plik `Makefile`, dzięki któremu
-poleceniem `make` można zbudować pliki wykonywalne. W przypadku systemu Windows, program `cmake` może domyślnie
-korzystać z innego generatora niż "Unix Makefiles" i np. utworzyć pliki projektu Visual Studio.
+poleceniem `make` można zbudować pliki wykonywalne. W przypadku systemu Windows programy można zbudować w środowisku WSL.
 
 ### Struktura repozytorium
 

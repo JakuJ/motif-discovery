@@ -17,6 +17,7 @@ using namespace std;
 #include <cmath>
 #include <vector>
 #include <iostream>
+#include <csignal>
 #include <cstring>
 
 #ifdef _OPENMP

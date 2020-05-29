@@ -4,11 +4,7 @@ project(Motifs LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-if(WIN32)
-    add_compile_options("-std=gnu++0x" "-O3" "-ffast-math" "-Wall")
-else()
-    add_compile_options("-std=gnu++0x" "-Ofast" "-ffast-math" "-Wall" "-Wno-expansion-to-defined")
-endif()
+add_compile_options("-std=gnu++0x" "-Ofast" "-ffast-math" "-Wall" "-Wno-expansion-to-defined")
 
 find_package(OpenMP REQUIRED)
 
