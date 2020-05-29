@@ -1,4 +1,4 @@
-# Probabilistyczne wykrywanie motywów w sieciach
+# Aproksymacyjne wykrywanie motywów w sieciach
 
 Repozytorium stworzone na potrzeby projektu w ramach przedmiotu "Grafy i sieci: projekt"
 prowadzonego w sem. letnim 2020 na Wydziale Matematyki i Nauk Informacyjnych PW.
