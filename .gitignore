@@ -1,7 +1,6 @@
 # IDE configs
 .idea/
 #macOS
-FASCIA/.DS_Store
 .DS_Store
 # CMake generated files
 CMakeCache.txt
@@ -13,8 +12,8 @@ Makefile
 *.cbp
 # Executable-generated files
 random_graphs/
-*.png
+/*.png
 *.gdd
-*.csv
-.vscode
-PIDFILE
+/*.csv
+.vscode/
+*checkpoint.ipynb
