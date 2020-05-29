@@ -12,13 +12,13 @@ endif ()
 
 add_compile_options("-std=gnu++0x" "-Ofast" "-ffast-math" "-Wall" "-Wno-expansion-to-defined")
 
-# FASCIA
-find_package(OpenMP)
+find_package(OpenMP REQUIRED)
 
+# FASCIA
 FILE(GLOB FASCIA_SOURCES FASCIA/*.h FASCIA/*.hpp)
 add_executable(fascia FASCIA/fascia.cpp ${FASCIA_SOURCES})
 target_link_libraries(fascia PUBLIC OpenMP::OpenMP_CXX)
 
-# Random graph generator
+# Narzędzie do generowania sieci podobnych
 add_executable(ensemble src/ensemble.cpp)
 target_link_libraries(ensemble PUBLIC OpenMP::OpenMP_CXX)

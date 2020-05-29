@@ -3,7 +3,7 @@
 set -e
 
 NETWORK="sieci/filmweb5k.graph"
-TEMPLATE="motif/graphs_n6_6/0.graph" # motyw
+TEMPLATE="motif/graphs_n6_6/1.graph" # motyw
 
 NUMRANDOMS=100
 RANDITERS=10

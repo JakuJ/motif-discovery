@@ -30,5 +30,5 @@ if __name__ == "__main__":
 
     plt.xlabel("Liczba wystąpień motywu")
     plt.ylabel("Prawdopodobieństwo wystąpienia")
-    plt.legend(['Sieci losowe', 'Sieć wejściowa', 'Sieci losowe', 'Sieć wejściowa'])
+    plt.legend(['Sieci podobne', 'Sieć wejściowa', 'Sieci podobne', 'Sieć wejściowa'])
     plt.show()

@@ -31,5 +31,5 @@ if __name__ == "__main__":
                     print("0", end='', flush=True) # nie motyw
                 exit(0)
 
-    print("2", end='', flush=True) # couldn't decide
+    print("2", end='', flush=True) # brak decyzji
     exit(0)

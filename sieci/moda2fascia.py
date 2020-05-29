@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import sys
-import os
 
 if __name__ == "__main__":
     path = sys.argv[1]
@@ -27,5 +26,5 @@ if __name__ == "__main__":
     with open(path[:path.find('.')] + '.graph', 'w') as f:
         print(verts, file=f)
         print(edges, file=f)
-        for v1, v2 in zip(df.loc[:,'v1_norm'],df.loc[:,'v2_norm']):
+        for v1, v2 in zip(df.loc[:, 'v1_norm'], df.loc[:, 'v2_norm']):
             print(f"{v1} {v2}", file=f)

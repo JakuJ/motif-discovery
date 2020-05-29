@@ -9,14 +9,14 @@ if [ $# -lt 2 ]; then
   echo -e "\tmotif size must range from 3 to 9"
   echo -e "\tstrat:\t\"positive\" or \"nonnegative\" - whether to return all templates that were
   \t\tnot discarded or just the ones that were predicted to be a motif by FASCIA."
-  echo -e "\t\tDefaults to \"nonnegative"
+  echo -e "\t\tDefaults to \"nonnegative\""
 
   echo -e "\tmodel:\t\"meanRandom\" or \"expER\" - a model for calculating max. number of iterations
   \t\tFASCIA tries before giving up."
   echo -e "\t\tDefaults to \"meanRandom\""
 
-  echo -e "\n\tThis script emits debug info to stderr. To get a list of probable motifs redirect emits
-  \toutput to a file like so: \"filter.sh args > motifs.txt\""
+  echo -e "\n\tThis script emits debug info to stderr. To get a list of probable motifs redirect
+  \toutput to a file like so: \"./filter.sh path/to/file.graph 6 positive > motifs.txt\""
   exit 1
 fi
 
@@ -58,7 +58,7 @@ strip() {
 
 for template_dir in $(ls "$TEMPLATE_ROOT" | grep -E "graphs_n\d_" | sort -h | head -n $((MAXSIZE - 2)) ); do
   for template in $(ls "$TEMPLATE_ROOT/$template_dir" | grep graph); do
-    # pełna ścieżka do kandydata
+    # Pełna ścieżka do kandydata
     templatepath="$TEMPLATE_ROOT/$template_dir/$template"
 
     # Przeliczenie liczności w sieciach podobnych
