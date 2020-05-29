@@ -13,6 +13,7 @@ Projekt skupia się na badaniu możliwości poprawy algorytmu MODA przez zastąp
 wersją algorytmu FASCIA z wczesnym stopowaniem opartym o testy statystyczne.
 
 Dokumentacja wstępna opisująca badane zagadnienie znajduje się w pliku **[Dokumentacja.pdf](Dokumentacja.pdf)**.
+Dokumentacja końcowa opisująca uzyskane wyniki i wnioski z badania znajduje się w pliku **[Raport.pdf](Raport.pdf)**.
 
 Katalog `Wizualizacje` zawiera wszystkie pliki potrzebne do odtworzenia wizualizacji użytych w raporcie końcowym.
 
