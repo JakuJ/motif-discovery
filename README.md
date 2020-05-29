@@ -60,6 +60,9 @@ Uruchomienie przygotowanych skryptów wymaga systemu unixopodobnego oraz następ
 * interpretera Pythona, `python3`, z bibliotekami *pandas, numpy, scipy, matplotlib*
 * opcjonalnie - środowiska `jupyter notebook` do odtworzenia wizualizacji przy użyciu notatnika [resultsCalc](Wizualizacje/resultsCalc.ipynb)
 
+Należy przy tym pamiętać, że system Windows może wymusić DOS-owski format końca linii w plikach `.sh`. Jeśli
+skrypty bashowe zwracają błędy o nieznanej komendzie `\r`, należy najpierw przepuścić je przez program `dos2unix`.
+
 Po skompletowaniu wymaganych programów można przejść do odtworzenia eksperymentów wykonanych na potrzeby
 projektu. Głównym skryptem przygotowanym z myślą o użytkowniku końcowym jest `filter.sh`. Skrypt zawiera dokumentację
 na temat schematu użycia.
