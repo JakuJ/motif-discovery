@@ -1,4 +1,5 @@
 *.h linguist-language=C
+*.ipynb linguist-language=Python
 FASCIA/* linguist-vendored
 FASCIA/fascia.cpp -linguist-vendored
 *.pdf linguist-documentation
