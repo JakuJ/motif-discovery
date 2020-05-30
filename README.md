@@ -104,6 +104,6 @@ oraz w populacji sieci losowych (przy użyciu skryptu `wykres.py`). Parametry sk
 skryptem potoku prztwarzania, dzięki czemu kończąc działanie po wykryciu odpowiedniej istotności statystycznej
 może zatrzymać działanie pozostałych programów.
 * `srednia_losowych.sh`, `fascia_wszystkie.sh` - generują wyniki działania alg. FASCIA dla wszystkich sieci w folderze
-`sieci` i wszystkich poddrzew do rozmiaru 6 włącznie, odpowiednio dla populacji gneerowanych sieci losowych i dla
+`sieci` i wszystkich poddrzew do rozmiaru 6 włącznie, odpowiednio dla populacji generowanych sieci losowych i dla
 samych sieci wejściowych.
-* `srednia_losowych.py`, `srednia_fascii.py` - wersje skryptu `script.py` przygotowane na potrzeby powyższych
+* `srednia_losowych.py`, `srednia_fascii.py` - wersje skryptu `script.py` przygotowane na potrzeby powyższych.
